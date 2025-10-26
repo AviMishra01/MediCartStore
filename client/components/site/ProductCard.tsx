@@ -17,7 +17,9 @@ export default function ProductCard(p: ProductCardProps) {
   const { add } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
-  const firstImage = (p as any).images && (p as any).images.length ? (p as any).images[0] : p.image;
+
+  // Fallback for product image
+  const firstImage = p.images && p.images.length ? p.images[0] : p.image;
   const placeholder = "https://via.placeholder.com/400?text=No+Image";
   const imgSrc = firstImage || placeholder;
 
@@ -29,10 +31,21 @@ export default function ProductCard(p: ProductCardProps) {
       navigate(`/login?msg=${msg}&next=${next}`);
       return;
     }
-    add({ _id: p._id, name: p.name, price: p.price, image: firstImage, stock: p.stock });
+    if (p.stock > 0) {
+      add({ _id: p._id, name: p.name, price: p.price, image: imgSrc, stock: p.stock });
+    }
   };
+
   return (
-    <div className="group overflow-hidden rounded-lg border bg-card">
+    <div className="group relative overflow-hidden rounded-xl border bg-card shadow hover:shadow-lg transition-all duration-300">
+      {/* Stock Badge */}
+      {p.stock === 0 && (
+        <span className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-lg z-10">
+          Out of Stock
+        </span>
+      )}
+
+      {/* Image & Link */}
       <Link to={`/product/${p._id}`} className="block overflow-hidden">
         <img
           src={imgSrc}
@@ -41,18 +54,30 @@ export default function ProductCard(p: ProductCardProps) {
           loading="lazy"
         />
       </Link>
-      <div className="space-y-1 p-4">
-        <Link to={`/product/${p._id}`} className="line-clamp-1 font-medium hover:text-primary">
+
+      {/* Product Details */}
+      <div className="p-4 space-y-1">
+        <Link to={`/product/${p._id}`} className="line-clamp-1 font-medium hover:text-primary transition-colors">
           {p.name}
         </Link>
-        <div className="text-sm text-muted-foreground">{p.category ?? ""}</div>
+        {p.category && <div className="text-sm text-muted-foreground">{p.category}</div>}
         <div className="flex items-center justify-between pt-2">
           <div className="text-base font-semibold">₹{p.price.toFixed(2)}</div>
-          <button className="rounded-md bg-primary px-3 py-2 text-xs font-medium text-primary-foreground hover:bg-primary/90" onClick={onAdd}>
+          <button
+            className={`rounded-md px-3 py-2 text-xs font-medium transition ${
+              p.stock > 0
+                ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                : "bg-gray-300 text-gray-600 cursor-not-allowed"
+            }`}
+            onClick={onAdd}
+            disabled={p.stock === 0}
+          >
             Add to Cart
           </button>
         </div>
-        <div className="text-xs text-muted-foreground">{p.stock > 0 ? `${p.stock} in stock` : "Out of stock"}</div>
+        <div className="text-xs text-muted-foreground">
+          {p.stock > 0 ? `${p.stock} in stock` : "Out of stock"}
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,3 @@
-// pages/Analytics.tsx
 import React, { useEffect, useState } from "react";
 import { Bar, Pie } from "react-chartjs-2";
 import {
@@ -24,59 +23,64 @@ interface AnalyticsData {
 
 export default function Analytics() {
   const [data, setData] = useState<AnalyticsData | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const token = localStorage.getItem("ADMIN_TOKEN");
 
   useEffect(() => {
+    const fetchJSON = async (url: string) => {
+      const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+      const contentType = res.headers.get("content-type");
+      if (!res.ok) throw new Error(`${url} returned status ${res.status}`);
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error(`${url} did not return JSON. Got ${contentType}`);
+      }
+      return res.json();
+    };
+
     const fetchAnalytics = async () => {
-      if (!token) return alert("No admin token found!");
-      setLoading(true);
+      if (!token) {
+        setError("No admin token found!");
+        setLoading(false);
+        return;
+      }
 
       try {
-        const baseUrl = "http://localhost:5000"; // replace with your backend URL
-        const [productsRes, ordersRes] = await Promise.all([
-          fetch(`${baseUrl}/api/admin/products`, { headers: { Authorization: `Bearer ${token}` } }),
-          fetch(`${baseUrl}/api/admin/orders`, { headers: { Authorization: `Bearer ${token}` } }),
+        setLoading(true);
+
+        // Replace with correct backend URL if needed
+        const baseUrl = "http://localhost:5000";
+
+        const [productsData, ordersData] = await Promise.all([
+          fetchJSON(`${baseUrl}/api/admin/products`),
+          fetchJSON(`${baseUrl}/api/admin/orders`),
         ]);
 
-        // Check for non-JSON response
-        if (!productsRes.ok || !ordersRes.ok) {
-          throw new Error("Failed to fetch analytics data. Check your API or token.");
-        }
+        const totalProducts = productsData.total ?? productsData.items?.length ?? 0;
+        const totalOrders = ordersData.total ?? ordersData.items?.length ?? 0;
 
-        const contentType1 = productsRes.headers.get("content-type");
-        const contentType2 = ordersRes.headers.get("content-type");
-
-        if (!contentType1?.includes("application/json") || !contentType2?.includes("application/json")) {
-          throw new Error("API returned non-JSON data. Probably hitting frontend route.");
-        }
-
-        const productsData = await productsRes.json();
-        const ordersData = await ordersRes.json();
-
-        const totalProducts = productsData.total || productsData.items?.length || 0;
-        const totalOrders = ordersData.total || ordersData.items?.length || 0;
         const totalRevenue =
-          ordersData.items?.reduce((sum: number, order: any) => (order.status === "completed" ? sum + order.totalAmount : sum), 0) || 0;
+          ordersData.items?.reduce(
+            (sum: number, order: any) => (order.status === "completed" ? sum + order.total : sum),
+            0
+          ) ?? 0;
 
-        // Products by category
         const productsByCategory: Record<string, number> = {};
-        (productsData.items || []).forEach((p: any) => {
-          const cat = p.category || "Uncategorized";
-          productsByCategory[cat] = (productsByCategory[cat] || 0) + 1;
+        (productsData.items ?? []).forEach((p: any) => {
+          const cat = p.category ?? "Uncategorized";
+          productsByCategory[cat] = (productsByCategory[cat] ?? 0) + 1;
         });
 
-        // Orders by month
         const ordersByMonth: Record<string, number> = {};
-        (ordersData.items || []).forEach((order: any) => {
+        (ordersData.items ?? []).forEach((order: any) => {
           const month = new Date(order.createdAt).toLocaleString("default", { month: "short", year: "numeric" });
-          ordersByMonth[month] = (ordersByMonth[month] || 0) + 1;
+          ordersByMonth[month] = (ordersByMonth[month] ?? 0) + 1;
         });
 
         setData({ totalProducts, totalOrders, totalRevenue, productsByCategory, ordersByMonth });
       } catch (err: any) {
-        console.error(err);
-        alert(err.message || "Error fetching analytics data");
+        console.error("Analytics fetch error:", err);
+        setError(err.message || "Failed to fetch analytics data");
       } finally {
         setLoading(false);
       }
@@ -85,13 +89,23 @@ export default function Analytics() {
     fetchAnalytics();
   }, [token]);
 
-  if (loading || !data)
+  if (loading)
     return (
       <div className="p-6 text-center text-gray-600">
-        <div className="inline-block h-12 w-12 border-4 border-green-500 border-dashed rounded-full animate-spin"></div>
+        <div className="inline-block h-12 w-12 border-4 border-indigo-500 border-dashed rounded-full animate-spin"></div>
         <p className="mt-4">Loading analytics...</p>
       </div>
     );
+
+  if (error)
+    return (
+      <div className="p-6 text-center text-red-600">
+        <p className="text-lg font-semibold">Error: {error}</p>
+        <p>Please check your backend URL or API token.</p>
+      </div>
+    );
+
+  if (!data) return null;
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
@@ -115,7 +129,6 @@ export default function Analytics() {
 
       {/* Charts */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Products by Category */}
         <div className="p-6 bg-white shadow rounded-lg">
           <h3 className="text-lg font-semibold mb-4">Products by Category</h3>
           <Pie
@@ -132,7 +145,6 @@ export default function Analytics() {
           />
         </div>
 
-        {/* Orders by Month */}
         <div className="p-6 bg-white shadow rounded-lg">
           <h3 className="text-lg font-semibold mb-4">Orders by Month</h3>
           <Bar

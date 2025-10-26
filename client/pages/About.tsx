@@ -1,176 +1,232 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Zap, Handshake, Heart, MessageSquare, Briefcase, Users, Award } from 'lucide-react';
+import { ShieldCheck, Zap, Handshake, Heart, MessageSquare, Briefcase, Users, Award, ShoppingBag, Mail, GitFork } from 'lucide-react';
 import { motion } from "framer-motion";
 import SagarJhaProfile from "../Images/sagar-jhaProfile.jpg";
+import AbhijeetProfile from "../Images/abhijeet-mishraProfile.jpg"; // Add your profile image
+
+const PRIMARY_COLOR = "indigo";
+const PRIMARY_CLASS = `text-${PRIMARY_COLOR}-600`;
+const BG_PRIMARY_CLASS = `bg-${PRIMARY_COLOR}-600`;
+const HOVER_BG_CLASS = `hover:bg-${PRIMARY_COLOR}-700`;
+
+function ValueCard({ icon: Icon, title, description }) {
+  return (
+    <div className="p-6 bg-white rounded-xl border border-gray-100 text-center shadow-lg transition duration-300 hover:shadow-2xl hover:border-indigo-200">
+      <Icon size={32} className={`text-${PRIMARY_COLOR}-600 mx-auto mb-3`} />
+      <h4 className="text-xl font-bold text-gray-900 mb-1">{title}</h4>
+      <p className="text-sm text-gray-500">{description}</p>
+    </div>
+  );
+}
 
 export default function About() {
   return (
     <div className="w-full">
 
-      {/* ------------------- 1. Hero Section: Our Story (with CEO story) ------------------- */}
-      <section className="w-full py-12 lg:py-20 bg-gray-50 text-center">
-        <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-3">
-          Our Story
+      {/* 1. Hero Section */}
+      <section className="w-full py-16 lg:py-24 bg-indigo-50/70 text-center">
+        <p className={`text-sm font-bold uppercase tracking-widest ${PRIMARY_CLASS} mb-3`}>
+          Our Story, Our Mission
         </p>
-        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
-          Bringing Quality Healthcare <br className="hidden md:inline"/> Right to Your Doorstep.
+        <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 mb-8 leading-tight">
+          Seamless Healthcare, <br className="hidden md:inline" /> Delivered with Trust.
         </h1>
-        <p className="text-lg text-gray-600 max-w-3xl mx-auto space-y-4 text-justify">
-          It all started with <strong>Sagar Jha</strong>, a passionate entrepreneur and dentist from Kathmandu, Nepal. From a young age, Sagar noticed the struggles people faced in accessing genuine medicines and healthcare services. Inspired to make a difference, he envisioned a platform where healthcare would be transparent, trustworthy, and convenient for everyone.
-          <br /><br />
-          With this vision, he founded <strong>Medizo</strong> — a digital healthcare startup aimed at simplifying the way people obtain medications, medical equipment, and wellness products. His journey was filled with challenges: building a tech platform from scratch, ensuring compliance with medical regulations, and earning users’ trust. But Sagar’s unwavering dedication, empathy, and technical expertise turned Medizo into a trusted platform for hundreds of users.
-          <br /><br />
-          Today, Medizo continues to grow under his leadership, merging technology with care. Every feature, every service, and every product is a reflection of Sagar’s commitment to making healthcare simple, affordable, and accessible for all. Innovation, empathy, and trust form the heart of Medizo’s story — a story still being written with each satisfied user and every step towards a healthier future.
-        </p>
+        <div className="text-lg text-gray-700 max-w-4xl mx-auto px-4 space-y-5 text-justify">
+          <p>
+            The journey of Medizo began with <strong>Sagar Jha</strong>, a medical field expert, and <strong>Abhijeet Mishra</strong>, a tech and business expert. Together, they envisioned a digital bridge connecting people directly to certified, affordable, and reliable healthcare products.
+          </p>
+          <p>
+            Founded on the principles of <strong>transparency and empathy</strong>, Medizo quickly grew from a simple idea into a <strong>trusted digital pharmacy</strong>. Despite technological challenges and regulatory hurdles, Sagar’s dedication to healthcare and Abhijeet’s tech expertise powered the platform’s success.
+          </p>
+          <p className="font-semibold text-gray-800">
+            Today, Medizo reflects their shared belief: that high-quality health management should be <strong>simple, convenient, and accessible</strong> for everyone — <strong>providing medical accessories everywhere, every time</strong>.
+          </p>
+
+        </div>
       </section>
 
-      {/* ------------------- 2. Key Trust Pillars Section ------------------- */}
-      <section className="container max-w-6xl py-10">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-10">Why Choose Medizo?</h2>
+
+      {/* 2. Key Trust Pillars */}
+      <section className="container max-w-7xl py-16 lg:py-24 px-4">
+        <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">Our Promise to You</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          <div className="p-6 bg-white rounded-xl shadow-lg border border-gray-100 transition duration-300 hover:shadow-xl hover:border-primary/50">
-            <ShieldCheck size={36} className="text-primary mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Certified Quality</h3>
+          <div className="p-8 bg-white rounded-2xl shadow-xl border border-gray-100 transition duration-300 hover:shadow-2xl hover:border-indigo-300">
+            <ShieldCheck size={40} className={`text-${PRIMARY_COLOR}-600 mx-auto mb-4`} />
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">Certified Quality</h3>
             <p className="text-gray-600">
-              We source all medications from certified manufacturers and follow strict regulatory guidelines to ensure every product is 100% genuine and safe.
+              Every supplier is verified and strict quality checks ensure you receive <strong>100% genuine and safe</strong> products.
             </p>
           </div>
-          <div className="p-6 bg-white rounded-xl shadow-lg border border-gray-100 transition duration-300 hover:shadow-xl hover:border-primary/50">
-            <Zap size={36} className="text-primary mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Fast, Discreet Delivery</h3>
+          <div className="p-8 bg-white rounded-2xl shadow-xl border border-gray-100 transition duration-300 hover:shadow-2xl hover:border-indigo-300">
+            <Zap size={40} className={`text-${PRIMARY_COLOR}-600 mx-auto mb-4`} />
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">Rapid & Discreet</h3>
             <p className="text-gray-600">
-              Get your essentials quickly with our reliable, tracked, and discreet delivery service. Health management made hassle-free.
+              Get your essential medication fast. Our delivery is <strong>reliable, tracked, and discreet</strong>.
             </p>
           </div>
-          <div className="p-6 bg-white rounded-xl shadow-lg border border-gray-100 transition duration-300 hover:shadow-xl hover:border-primary/50">
-            <Handshake size={36} className="text-primary mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Dedicated Care</h3>
+          <div className="p-8 bg-white rounded-2xl shadow-xl border border-gray-100 transition duration-300 hover:shadow-2xl hover:border-indigo-300">
+            <Handshake size={40} className={`text-${PRIMARY_COLOR}-600 mx-auto mb-4`} />
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">Expert Human Care</h3>
             <p className="text-gray-600">
-              Our registered pharmacists are available for consultation and support via chat or phone, ensuring you get the right advice.
+              Our team of <strong>registered pharmacists</strong> is available via chat and phone to provide professional support.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ------------------- 3. CEO Profile Section (Middle) ------------------- */}
-      <section className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-100 flex items-center justify-center px-4 py-12">
+      {/* 3. Leadership Profiles */}
+      <section className="min-h-screen bg-gradient-to-tr from-indigo-50 to-white flex flex-col items-center justify-center px-4 py-16 lg:py-24 space-y-16">
+
+        {/* Sagar Jha */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="bg-white rounded-3xl shadow-2xl p-10 max-w-4xl w-full text-center border border-gray-100"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="bg-white rounded-3xl shadow-2xl p-6 md:p-12 max-w-5xl w-full text-center border-4 border-white ring-8 ring-indigo-100/50"
         >
-          <div className="flex justify-center">
-            <img
-              src={SagarJhaProfile}
-              alt="Sagar Jha"
-              className="w-44 h-44 rounded-full object-cover shadow-lg border-4 border-blue-500"
-            />
-          </div>
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 border-b pb-4">Meet the Visionary</h2>
+          <div className="flex flex-col lg:flex-row items-center lg:items-start gap-10">
 
-          <h1 className="text-4xl font-bold mt-6 text-gray-900">Sagar Jha</h1>
-          <p className="text-blue-600 font-semibold text-lg mt-1">Founder & CEO of Medizo</p>
-
-          <p className="italic text-gray-600 mt-4">
-            “Innovation in healthcare begins with empathy — making wellness simple, affordable, and accessible for everyone.”
-          </p>
-
-          <div className="mt-8 text-gray-700 leading-relaxed text-justify space-y-4">
-            <p><strong>Sagar Jha</strong> is the visionary <strong>Founder & CEO of Medizo</strong>, a digital healthcare startup redefining how people buy medicines and healthcare products online. His journey began with a mission to solve a simple but powerful problem — to make healthcare more transparent, affordable, and accessible for everyone.</p>
-            <p>Under his leadership, Medizo has evolved from a small concept into a rapidly growing platform trusted by hundreds of users. Sagar’s technical expertise, passion for innovation, and deep understanding of user needs have helped shape Medizo into a brand that prioritizes trust, quality, and care above all else.</p>
-            <p>Beyond technology, Sagar believes in the power of humanity in business. His work reflects a balance between cutting-edge software development and meaningful social impact — ensuring that every Medizo initiative serves a real human purpose.</p>
-          </div>
-
-          <div className="mt-10 text-left bg-blue-50 p-6 rounded-2xl shadow-sm">
-            <h2 className="text-2xl font-semibold text-blue-700 mb-3">Leadership & Vision 🌍</h2>
-            <p className="text-gray-700 leading-relaxed">
-              As the driving force behind Medizo, Sagar is focused on building a sustainable healthcare ecosystem. His leadership centers on transparency, innovation, and teamwork — empowering every individual in his company to make a difference.  
-              He envisions Medizo becoming one of the most trusted and loved online healthcare brands across South Asia by merging AI technology with medical convenience.
-            </p>
-          </div>
-
-          <div className="mt-10 grid md:grid-cols-2 gap-6 text-left">
-            <div className="bg-gray-50 p-5 rounded-2xl shadow-sm">
-              <p><strong>📍 Location:</strong> Kathmandu, Nepal</p>
-              <p><strong>🎓 Education:</strong> Dentist and Bachelor in Medicine</p>
-              <p><strong>💼 Role:</strong> Founder & CEO, Medizo</p>
-              <p><strong>💡 Expertise:</strong> Dental Field, Software Development, Product Design, Leadership</p>
+            <div className="flex flex-col items-center flex-shrink-0 lg:w-1/3">
+              <img
+                src={SagarJhaProfile}
+                alt="Sagar Jha - Founder & CEO of Medizo"
+                className="w-48 h-48 rounded-full object-cover shadow-xl border-4 border-indigo-500 ring-4 ring-indigo-200/50"
+              />
+              <h1 className="text-3xl font-extrabold mt-6 text-gray-900">Sagar Jha</h1>
+              <p className={`text-${PRIMARY_COLOR}-700 font-semibold text-lg mt-1`}>Founder & CEO, Medizo</p>
+              <p className="italic text-gray-500 mt-3 max-w-xs">
+                “Innovation in healthcare begins with empathy — making wellness simple, affordable, and accessible for everyone.”
+              </p>
+              <div className="mt-6 flex justify-center gap-4 text-sm">
+                <a href="https://linkedin.com" target="_blank" rel="noreferrer" className={`flex items-center gap-1 ${PRIMARY_CLASS} hover:text-indigo-800 font-semibold transition`}>
+                  <Briefcase size={16} /> LinkedIn
+                </a>
+                <a href="https://github.com" target="_blank" rel="noreferrer" className="flex items-center gap-1 text-gray-700 hover:text-black font-semibold transition">
+                  <GitFork size={16} /> GitHub
+                </a>
+                <a href="mailto:sagar@medizo.com" className="flex items-center gap-1 text-red-600 hover:text-red-800 font-semibold transition">
+                  <Mail size={16} /> Email
+                </a>
+              </div>
             </div>
-            <div className="bg-gray-50 p-5 rounded-2xl shadow-sm">
-              <p><strong>📧 Email:</strong> <a href="mailto:sagar@medizo.com" className="text-blue-600">sagar@medizo.com</a></p>
-              <p><strong>🌐 Website:</strong> <a href="https://medizo.com" className="text-blue-600">www.medizo.com</a></p>
-              <p><strong>💬 Motto:</strong> “Build technology that heals.”</p>
-              <p><strong>🕊️ Interests:</strong> Innovation, Reading, Fitness, Entrepreneurship</p>
+
+            <div className="text-left leading-relaxed text-gray-700 space-y-5 lg:w-2/3">
+              <p>
+                <strong>Sagar Jha</strong> is a medical field expert and the Founder & CEO of Medizo. With a background in healthcare, he focuses on <strong>quality healthcare solutions</strong> and improving access to essential medicines for everyone.
+              </p>
+              <div className={`mt-6 p-5 rounded-2xl shadow-inner bg-indigo-50 border-l-4 border-${PRIMARY_COLOR}-600`}>
+                <h2 className={`text-xl font-bold text-${PRIMARY_COLOR}-700 mb-2`}>Our Guiding Vision 🌍</h2>
+                <p>
+                  Sagar aims to create a sustainable, user-centric healthcare ecosystem, making Medizo the most trusted online healthcare brand across South Asia.
+                </p>
+              </div>
+              <div className="grid md:grid-cols-2 gap-4 pt-4 border-t border-gray-100">
+                <p className="text-sm">📍 Location: Kathmandu, Nepal</p>
+                <p className="text-sm">🎓 Education: Dentist</p>
+                <p className="text-sm">💡 Expertise: Medical Field & Entrepreneurship</p>
+                <p className="text-sm">💬 Motto: “Empathy drives innovation in healthcare.”</p>
+              </div>
             </div>
-          </div>
-
-          <div className="mt-10 flex justify-center gap-6">
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="text-blue-700 hover:text-blue-900 font-semibold">LinkedIn</a>
-            <a href="https://github.com" target="_blank" rel="noreferrer" className="text-gray-700 hover:text-black font-semibold">GitHub</a>
-            <a href="mailto:sagar@medizo.com" className="text-red-600 hover:text-red-800 font-semibold">Email</a>
-          </div>
-
-          <div className="mt-12 text-gray-500 text-sm">
-            <p>© {new Date().getFullYear()} Medizo — Empowering Healthcare Digitally</p>
           </div>
         </motion.div>
+
+        {/* Abhijeet Mishra */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="bg-white rounded-3xl shadow-2xl p-6 md:p-12 max-w-5xl w-full text-center border-4 border-white ring-8 ring-indigo-100/50"
+        >
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 border-b pb-4">Meet the Co-Founder</h2>
+          <div className="flex flex-col lg:flex-row items-center lg:items-start gap-10">
+
+            <div className="flex flex-col items-center flex-shrink-0 lg:w-1/3">
+              <img
+                src={AbhijeetProfile}
+                alt="Abhijeet Mishra - CFO & Tech Expert"
+                className="w-48 h-48 rounded-full object-cover shadow-xl border-4 border-indigo-500 ring-4 ring-indigo-200/50"
+              />
+              <h1 className="text-3xl font-extrabold mt-6 text-gray-900">Abhijeet Mishra</h1>
+              <p className={`text-${PRIMARY_COLOR}-700 font-semibold text-lg mt-1`}>CFO & Co-Founder, Tech Expert</p>
+              <p className="italic text-gray-500 mt-3 max-w-xs">
+                “Bridging technology with healthcare to create seamless and reliable solutions for everyone.”
+              </p>
+              <div className="mt-6 flex justify-center gap-4 text-sm">
+                <a href="https://linkedin.com" target="_blank" rel="noreferrer" className={`flex items-center gap-1 ${PRIMARY_CLASS} hover:text-indigo-800 font-semibold transition`}>
+                  <Briefcase size={16} /> LinkedIn
+                </a>
+                <a href="https://github.com" target="_blank" rel="noreferrer" className="flex items-center gap-1 text-gray-700 hover:text-black font-semibold transition">
+                  <GitFork size={16} /> GitHub
+                </a>
+                <a href="mailto:abhijeet@medizo.com" className="flex items-center gap-1 text-red-600 hover:text-red-800 font-semibold transition">
+                  <Mail size={16} /> Email
+                </a>
+              </div>
+            </div>
+
+            <div className="text-left leading-relaxed text-gray-700 space-y-5 lg:w-2/3">
+              <p>
+                <strong>Abhijeet Mishra</strong> is the CFO & Co-Founder of Medizo, bringing expertise in <strong>technology, product design, and business strategy</strong> to the platform. He ensures Medizo operates efficiently while delivering cutting-edge tech solutions for healthcare.
+              </p>
+              <div className={`mt-6 p-5 rounded-2xl shadow-inner bg-indigo-50 border-l-4 border-${PRIMARY_COLOR}-600`}>
+                <h2 className={`text-xl font-bold text-${PRIMARY_COLOR}-700 mb-2`}>Tech & Vision 💻</h2>
+                <p>
+                  Abhijeet focuses on integrating technology to streamline healthcare services, enhance user experience, and innovate digital solutions for medical access.
+                </p>
+              </div>
+              <div className="grid md:grid-cols-2 gap-4 pt-4 border-t border-gray-100">
+                <p className="text-sm">📍 Location: Kathmandu, Nepal</p>
+                <p className="text-sm">🎓 Education: Software Development</p>
+                <p className="text-sm">💡 Expertise: Software Development & Product Design</p>
+                <p className="text-sm">💬 Motto: “Technology that empowers healthcare.”</p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
       </section>
 
-      {/* ------------------- 4. Our Values Section ------------------- */}
-      <section className="container max-w-6xl py-10">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-10">Our Core Values</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <ValueCard icon={Heart} title="Empathy" description="Putting patient well-being at the heart of every decision." />
-          <ValueCard icon={Briefcase} title="Integrity" description="Upholding the highest standards of ethics and honesty." />
-          <ValueCard icon={Users} title="Accessibility" description="Making healthcare affordable and easy to reach for all." />
-          <ValueCard icon={Award} title="Excellence" description="Continuously improving our platform and service quality." />
+      {/* 4. Values Section */}
+      <section className="container max-w-7xl py-16 lg:py-24 px-4 bg-white">
+        <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">The Values That Drive Us</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <ValueCard icon={Heart} title="Empathy" description="Putting patient well-being at the heart of every service and decision." />
+          <ValueCard icon={Award} title="Integrity" description="Upholding the highest standards of ethics, honesty, and product quality." />
+          <ValueCard icon={Users} title="Accessibility" description="Striving to make essential healthcare products affordable and easy to reach." />
+          <ValueCard icon={Zap} title="Innovation" description="Continuously improving our platform with cutting-edge technology for convenience." />
         </div>
       </section>
 
-      {/* ------------------- 5. Call-to-Action Section ------------------- */}
-      <section className="container max-w-6xl text-center pt-10">
-        <div className="p-8 md:p-12 bg-white rounded-xl shadow-2xl border-t-4 border-primary">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">Ready to Experience Better Pharmacy?</h3>
-          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-            Explore our curated selection of health, wellness, and essential products today. Your health journey starts here.
+      {/* 5. Call-to-Action */}
+      <section className="container max-w-7xl text-center pt-10 pb-16 lg:pb-24">
+        <div className={`p-8 md:p-16 bg-white rounded-3xl shadow-2xl border-t-8 border-${PRIMARY_COLOR}-600`}>
+          <h3 className="text-3xl font-bold text-gray-900 mb-4">Ready to Transform Your Healthcare Experience?</h3>
+          <p className="text-lg text-gray-600 mb-8 max-w-3xl mx-auto">
+            Explore our verified products, get expert advice, and manage your health seamlessly. Join the Medizo family today.
           </p>
-          <div className="flex justify-center items-center gap-4 flex-wrap">
-            <Link 
-              to="/products" 
-              className="px-8 py-3 bg-primary text-primary-foreground font-semibold rounded-lg shadow-md hover:bg-primary/90 transition-colors flex items-center gap-2"
+          <div className="flex justify-center items-center gap-5 flex-wrap">
+            <Link
+              to="/products"
+              className={`px-10 py-3 ${BG_PRIMARY_CLASS} text-white font-bold rounded-full shadow-lg ${HOVER_BG_CLASS} transition-all duration-300 flex items-center gap-2 text-lg`}
             >
-              Start Shopping Now 
-              <Zap size={20} />
+              Start Shopping
+              <ShoppingBag size={20} />
             </Link>
-            <Link 
-              to="/contact" 
-              className="px-8 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition-colors flex items-center gap-2"
+            <Link
+              to="/contact"
+              className="px-10 py-3 border-2 border-gray-300 text-gray-700 font-bold rounded-full shadow-md hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 text-lg"
             >
-              Contact Us 
+              Get in Touch
               <MessageSquare size={20} />
             </Link>
           </div>
-          <div className="mt-8 text-sm text-gray-500">
-            <Link to="/privacy" className="hover:text-primary transition-colors mx-2">Privacy Policy</Link>
-            |
-            <Link to="/terms" className="hover:text-primary transition-colors mx-2">Terms of Service</Link>
-            |
-            <Link to="/help" className="hover:text-primary transition-colors mx-2">Help Center</Link>
-          </div>
         </div>
       </section>
 
-    </div>
-  );
-}
-
-function ValueCard({ icon: Icon, title, description }) {
-  return (
-    <div className="p-4 bg-white rounded-lg border border-gray-200 text-center shadow-sm">
-      <Icon size={30} className="text-primary mx-auto mb-2" />
-      <h4 className="text-lg font-bold text-gray-900 mb-1">{title}</h4>
-      <p className="text-sm text-gray-500">{description}</p>
     </div>
   );
 }

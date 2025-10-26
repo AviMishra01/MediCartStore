@@ -9,7 +9,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Users from "./pages/Users";
 import NotFound from "./pages/NotFound";
-import MyProfile from "./pages/MyProfile";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +35,8 @@ import Analytics from "@/pages/Analytics";
 import CheckoutPage from "@/pages/Checkout";
 import { AuthProvider } from "@/context/AuthContext";
 import AdminReviews from "@/pages/AdminReviews";
+import TermsOfService from "@/pages/TermsOfServices";
+import TermsOfServices from "@/pages/TermsOfServices";
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -50,7 +51,7 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/products" element={<Products />} />
                 <Route path="/product/:id" element={<ProductDetail />} />
-                <Route path="/my-profile" element={<MyProfile />} />
+                <Route path="/terms" element={<TermsOfServices />} />
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/checkout" element={<CheckoutPage />} />
                 <Route path="/login" element={<Login />} />
