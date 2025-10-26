@@ -1,0 +1,56 @@
+// Sample products used for seeding. Types are intentionally loose to avoid timestamp requirements.
+export const sampleProducts: any[] = [
+  {
+    name: "Paracetamol 500mg (10 tablets)",
+    description: "Pain reliever and fever reducer. Trusted and effective.",
+    price: 29.0,
+    image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1600&auto=format&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop"
+    ],
+    stock: 120,
+    category: "Pain Relief",
+    featured: true,
+  },
+  {
+    name: "Vitamin C 1000mg (60 capsules)",
+    description: "Boost immunity and overall wellness.",
+    price: 349.0,
+  image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop",
+  images: ["https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop"],
+    stock: 45,
+    category: "Vitamins",
+    featured: true,
+  },
+  {
+    name: "Cough Syrup (100ml)",
+    description: "Fast relief from dry cough.",
+    price: 129.0,
+  image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop",
+  images: ["https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop"],
+    stock: 60,
+    category: "Cold & Cough",
+    featured: false,
+  },
+  {
+    name: "Blood Glucose Test Strips (50)",
+    description: "Accurate monitoring for diabetes care.",
+    price: 699.0,
+  image: "https://images.unsplash.com/photo-1615485737656-9f771141b7d0?q=80&w=1600&auto=format&fit=crop",
+  images: ["https://images.unsplash.com/photo-1615485737656-9f771141b7d0?q=80&w=1600&auto=format&fit=crop"],
+    stock: 30,
+    category: "Diabetes Care",
+    featured: true,
+  },
+  {
+    name: "Antacid Tablets (20)",
+    description: "Relief from acidity and indigestion.",
+    price: 49.0,
+  image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop",
+  images: ["https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop"],
+    stock: 80,
+    category: "Stomach Care",
+    featured: false,
+  },
+];
