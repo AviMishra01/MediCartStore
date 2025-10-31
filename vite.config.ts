@@ -8,13 +8,26 @@ export default defineConfig({
   root: path.resolve(__dirname, "client"),
 
   server: {
-    host: '0.0.0.0', // ✅ Make server accessible on LAN (your phone)
-    port: 5173,       // 🔁 Optional: change if needed
+    host: "0.0.0.0", // Make server accessible on LAN
+    port: 5173,      // Optional: change if needed
     fs: {
       allow: [
         path.resolve(__dirname, "client"),
         path.resolve(__dirname, "shared"),
       ],
+    },
+    headers: {
+      // Fix COOP / COEP for Google OAuth popup in dev
+      "Cross-Origin-Opener-Policy": "same-origin-allow-popups",
+      "Cross-Origin-Embedder-Policy": "unsafe-none",
+    },
+    proxy: {
+      // Proxy API calls to Express backend (change port if your backend differs)
+      "/api": {
+        target: "http://localhost:5000",
+        changeOrigin: true,
+        secure: false,
+      },
     },
   },
 
